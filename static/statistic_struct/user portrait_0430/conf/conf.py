@@ -17,8 +17,8 @@ conf_path_test = parent_path + "/conf/" + conf_file_name
 conf_path = "conf/" + conf_file_name
 # conf_path = "conf/db.conf"
 # print(conf_path_test)
-
-conf_path_this = "G:/github/com.zc/static/statistic_struct/conf/db.conf"
+# G:\github\warehouse\static\statistic_struct\user portrait_0430\conf
+conf_path_this = "G:/github/warehouse/static/statistic_struct/user portrait_0430/conf/db.conf"
 
 class DBConf(object):
     _inst = None
