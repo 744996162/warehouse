@@ -113,7 +113,5 @@ if __name__ == "__main__":
         out_count(phone_city_list, "hb_city_al.data")
         out_count(idcard_list_male, "gt_male_age_al.data")
         out_count(idcard_list_female, "gt_female_age_al.data")
-
-
     pass
 

@@ -40,7 +40,7 @@ class CouponDao(BaseDao):
         elif sql == "":
             sql = "SELECT account,amount,coupon_id FROM coupon " \
                   "where DATE_FORMAT(updatetime,'%%Y%%m%%d')>='%s' " \
-                  "and DATE_FORMAT(updatetime,'%%Y%%m%%d')<'%s' and used=1 " % (s_day, end_day)
+                  "and DATE_FORMAT(updatetime,'%%Y%%m%%d')<'%s' and used=1 and coupon_id in (2,8,31) " % (s_day, end_day)
         print(sql)
         results = super(CouponDao, self).get_results(sql=sql)
         return results
@@ -118,11 +118,14 @@ def test():
     # result = o_consumer.result_to_txt("consu.txt")
     result = o_newsonsumer.result_to_txt("newconsu.txt")
 
-def getConumain():
+def getCoupon():
     o_coupon = CouponDao()
-    result = o_coupon.result_to_txt(file_out_path="coupon_0101_0201", s_day="20150101", end_day="20150201")
-    result = o_coupon.result_to_txt(file_out_path="coupon_0201_0301", s_day="20150201", end_day="20150301")
-    result = o_coupon.result_to_txt(file_out_path="coupon_0301_0401", s_day="20150301", end_day="20150401")
+    result = o_coupon.result_to_txt(file_out_path="data0518/20140101", s_day="20140101", end_day="20140401")
+    result = o_coupon.result_to_txt(file_out_path="data0518/20140401", s_day="20140401", end_day="20140701")
+    result = o_coupon.result_to_txt(file_out_path="data0518/20140701", s_day="20140701", end_day="20141001")
+    result = o_coupon.result_to_txt(file_out_path="data0518/20141001", s_day="20141001", end_day="20150101")
+    result = o_coupon.result_to_txt(file_out_path="data0518/20150101", s_day="20150101", end_day="20150401")
+
 
 def getConsumers():
     o_consumer = ConsumersDao()
@@ -132,13 +135,14 @@ def getConsumers():
 
 def getNewConsumers():
     o_newconsumer = NewConsumersDao()
-    result = o_newconsumer.result_to_txt(file_out_path="newconsumer_0101_0201", s_day="20150101", end_day="20150201")
-    result = o_newconsumer.result_to_txt(file_out_path="newconsumer_0201_0301", s_day="20150201", end_day="20150301")
-    result = o_newconsumer.result_to_txt(file_out_path="newconsumer_0301_0401", s_day="20150301", end_day="20150401")
-
+    result = o_newconsumer.result_to_txt(file_out_path="data0518/newconsumer20140101", s_day="20140101", end_day="20140401")
+    result = o_newconsumer.result_to_txt(file_out_path="data0518/newconsumer20140401", s_day="20140401", end_day="20140701")
+    result = o_newconsumer.result_to_txt(file_out_path="data0518/newconsumer20140701", s_day="20140701", end_day="20141001")
+    result = o_newconsumer.result_to_txt(file_out_path="data0518/newconsumer20141001", s_day="20141001", end_day="20150101")
+    result = o_newconsumer.result_to_txt(file_out_path="data0518/newconsumer20150101", s_day="20150101", end_day="20150401")
 
 if __name__ == "__main__":
     # test()
-    # getConumain()
+    getCoupon()
     # getConsumers()
-    getNewConsumers()
+    # getNewConsumers()

@@ -30,7 +30,7 @@ class Seat_level():
 class BaseUserMysqlDao(object):
     def __init__(self, dbtype):
         self.db = source_hbgj_mysql.Mysql(dbtype=dbtype)
-        print(self.db._type)
+        # print(self.db._type)
 
     def query_result_by_setValue(self, sql, model_class):
         result=self.db.get_all(sql)
@@ -92,7 +92,6 @@ def getDict():
 
     return d_seat_level, d_discount
 
-
 def statistics():
     d_seat_level, d_discount = getDict()
 
@@ -102,6 +101,7 @@ def statistics():
     count = 1
 
     seat_level = ["F", "C", "J"]
+
 
     """seat_level"""
     for key, value in d_seat_level.items():
@@ -143,8 +143,46 @@ def test_Flight_seat():
         print(i)
     pass
 
+
+def hb_discount_statistic(s1,s2):
+
+    o_Flight_seat = Flight_seat_level()
+    result_model_list = o_Flight_seat.get_data(s1, s2)
+    discount_list = []
+    count = 0
+    count_all = 0
+    for result_model in result_model_list:
+        count_all += 1
+        # uid =result_model.uid
+        # seat_name = result_model.seat_name
+        try:
+            discount = float(result_model.discount)
+        except Exception as e:
+            # print(e)
+            # print(result_model.discount)
+            discount = 0.7
+        if discount >= 0.8:
+            count += 1
+    return count_all, count
+
+def hb_discount_statistic_main():
+    file_out = "data/discount_result.data"
+
+    print("20130101",hb_discount_statistic("20130101","20130401"))
+    print("20130401",hb_discount_statistic("20130401","20130701"))
+    print("20130701",hb_discount_statistic("20130701","20131001"))
+    print("20131001",hb_discount_statistic("20131001","20140101"))
+
+    print("20140101",hb_discount_statistic("20140101","20140401"))
+    print("20140401",hb_discount_statistic("20140401","20140701"))
+    print("20140701",hb_discount_statistic("20140701","20141001"))
+    print("20141001",hb_discount_statistic("20141001","20150101"))
+
+    print("20150101",hb_discount_statistic("20150101","20150401"))
+    pass
+
 if __name__ == "__main__":
 
     # test_Flight_seat()
-    statistics()
+    hb_discount_statistic_main()
     pass
