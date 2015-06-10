@@ -33,8 +33,8 @@ def printschedule(r):
     out=flights[(origin,destination)][int(r[d])]
     ret=flights[(destination,origin)][int(r[d+1])]
     print '%10s%10s %5s-%5s $%3s %5s-%5s $%3s' % (name,origin,
-                                                  out[0],out[1],out[2],
-                                                  ret[0],ret[1],ret[2])
+                                                  out[0], out[1], out[2],
+                                                  ret[0], ret[1], ret[2])
 
 #成本函数
 def schedulecost(sol):

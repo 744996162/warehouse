@@ -1,7 +1,7 @@
 #coding=utf-8
 from math import sqrt
 
-critics={'Lisa Rose': {'Lady in the Water': 2.5, 'Snakes on a Plane': 3.5,
+critics = {'Lisa Rose': {'Lady in the Water': 2.5, 'Snakes on a Plane': 3.5,
  'Just My Luck': 3.0, 'Superman Returns': 3.5, 'You, Me and Dupree': 2.5,
  'The Night Listener': 3.0},
 'Gene Seymour': {'Lady in the Water': 3.0, 'Snakes on a Plane': 3.5,
@@ -17,15 +17,15 @@ critics={'Lisa Rose': {'Lady in the Water': 2.5, 'Snakes on a Plane': 3.5,
  'You, Me and Dupree': 2.0},
 'Jack Matthews': {'Lady in the Water': 3.0, 'Snakes on a Plane': 4.0,
  'The Night Listener': 3.0, 'Superman Returns': 5.0, 'You, Me and Dupree': 3.5},
-'Toby': {'Snakes on a Plane':4.5,'You, Me and Dupree':1.0,'Superman Returns':4.0}}
+'Toby': {'Snakes on a Plane': 4.5,'You, Me and Dupree': 1.0, 'Superman Returns': 4.0}}
 
 
 #返回一个有关person1与person2的基于距离的相似度评价
 def sim_distance(prefs, person1, person2):
       si={}
-      for item in prefs[person1]:
-        if item in prefs[person2]:
-            si[item] = 1
+      for itemid in prefs[person1]:
+        if itemid in prefs[person2]:
+            si[itemid] = 1
 
       # if they have no ratings in common, return 0
       if len(si) == 0:
@@ -40,16 +40,16 @@ def sim_distance(prefs, person1, person2):
 def sim_pearson(prefs, p1, p2):
 
     #得到双方都评价过的物品列表
-    si={}
-    for item in prefs[p1]:
-        if item in prefs[p2]:
-            si[item]=1
+    si = {}
+    for itemid in prefs[p1]:
+        if itemid in prefs[p2]:
+            si[itemid] = 1
 
     #得到列元素的个数
-    n=len(si)
+    n = len(si)
 
     #如果两者没有共同之处，则返回1
-    if n==0:
+    if n == 0:
         return 1
 
     #对所有偏好求和
@@ -69,7 +69,7 @@ def sim_pearson(prefs, p1, p2):
     if den==0:
         return 0
 
-    r=num/den
+    r = num/den
 
     return r
 
@@ -78,38 +78,48 @@ def sim_pearson(prefs, p1, p2):
 #返回结果的个数和相似度函数均为可选参数
 
 def topMatches(prefs, person, n=5, similarity=sim_pearson):
+    """
+    scores data_struct
+    [(similarity_value1, userid1) , (similarity_value2, userid2), ...]
+    """
+
     scores=[(similarity(prefs, person, other), other) for other in prefs if other != person]
 
 
     #对列表进行排序，评价值最高者排在最前面
     scores.sort()
+
+    # 倒序
     scores.reverse()
-    return  scores[0:n]
+    return scores[0:n]
 
 
 
 #利用所有他人评价值的加权平均，为某人提供建议
-def getRecommendations(prefs, person, similarity=sim_pearson):
+
+def getRecommendations(prefs, person, similarity=sim_distance):
     totals = {}
     simSums = {}
     for other in prefs:
 
         #不要和自己做比较
-        if other == person: continue
+        if other == person:
+            continue
         sim = similarity(prefs, person, other)
 
         #忽略评价值为0或小于0的情况
-        if sim <= 0: continue
-        for item in prefs[other]:
+        if sim <= 0:
+            continue
+        for itemid in prefs[other]:
 
             #只对自己还未看过的影片进行评价
-            if item not in prefs[person] or prefs[person][item] == 0:
+            if itemid not in prefs[person] or prefs[person][itemid] == 0:
                 #相似度*评价值
-                totals.setdefault(item, 0)
-                totals[item] += prefs[other][item]*sim
+                totals.setdefault(itemid, 0)
+                totals[itemid] += prefs[other][itemid]*sim
                 #相似度之和
-                simSums.setdefault(item, 0)
-                simSums[item] += sim
+                simSums.setdefault(itemid, 0)
+                simSums[itemid] += sim
 
 
     #建立一个归一化的列表
@@ -140,6 +150,11 @@ def initializeUserDict(tag,count=5):
 #使用MovieLens数据集
 
 def loadMovieLens(path='data'):
+    """
+    prefs data_struct
+    {userid1:{movie_name1:rating_value, movie_name2:rating_value,...}, userid2:{...},...}
+
+    """
     #获取影片标题
     movies={}
     for line in open(path+'/u.item'):
@@ -149,21 +164,20 @@ def loadMovieLens(path='data'):
     #加载数据
     prefs={}
     for line in open(path+'/u.data'):
-        (user,movieid,rating, ts) = line.split('\t')
-        prefs.setdefault(user, {})
-        prefs[user][movies[movieid]] = float(rating)
+        (userid, movieid, rating, ts) = line.split('\t')
+        prefs.setdefault(userid, {})
+        prefs[userid][movies[movieid]] = float(rating)
     return prefs
 
+if __name__ == "__main__":
 
-
-if __name__=="__main__":
-
-    # print(topMatches(critics,'Toby',n=3))
-    # print(getRecommendations(critics,'Jack Matthews'))
+    # print(topMatches(critics, 'Toby', n=3))
+    # print(getRecommendations(critics, 'Jack Matthews'))
     ###movie测试
     prefs = loadMovieLens()
     # print(prefs['23'])
     #获取推荐
     print(getRecommendations(prefs, '87')[0:30])
+    print(topMatches(prefs, "10")[0:10])
     pass
 

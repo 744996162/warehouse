@@ -80,7 +80,7 @@ class ConsumersFromGtDao(Mysql):
                 "where ORDERSTATUE not in (2,12,21,51,75) " \
                 "and DATE_FORMAT(createtime,'%%Y%%m%%d')<'%s' " \
                 "and DATE_FORMAT(createtime,'%%Y%%m%%d')>='%s' " \
-                "and p like '%%gtgj%%' " %(s2, s1)
+                "and p like '%%gtgj%%' " % (s2, s1)
         # print(sql)
         result = self.get_all(sql)
 
@@ -105,17 +105,17 @@ def consumers(s1, s2):
     print(s1, len(t))
 
 if __name__ == "__main__":
-    # newconsumers("20140101","20140401")
-    # newconsumers("20140401","20140701")
-    # newconsumers("20140701","20141001")
-    # newconsumers("20141001","20150101")
-    # newconsumers("20150101","20150401")
+    newconsumers("20140101","20140401")
+    newconsumers("20140401","20140701")
+    newconsumers("20140701","20141001")
+    newconsumers("20141001","20150101")
+    newconsumers("20150101","20150401")
 
-
-    consumers("20140101","20140401")
-    consumers("20140401","20140701")
-    consumers("20140701","20141001")
-    consumers("20141001","20150101")
-    consumers("20150101","20150401")
+    #
+    # consumers("20140101","20140401")
+    # consumers("20140401","20140701")
+    # consumers("20140701","20141001")
+    # consumers("20141001","20150101")
+    # consumers("20150101","20150401")
     pass
 

@@ -1,14 +1,15 @@
 #coding=utf-8
 
 from numpy import *
+
 def loadSimpData():
     datMat = mat([[ 1. ,2.1],[ 2. ,  1.1],[ 1.3,  1. ],[ 1. ,  1. ],[ 2. ,  1. ]])
     classLabels = [1.0, 1.0, -1.0, -1.0, 1.0]
     return datMat,classLabels
 
 
-def stumpClassify(dataMatrix,dimen,threshVal,threshIneq):
-    retArray=ones((shape(dataMatrix)[0],1))
+def stumpClassify(dataMatrix,dimen,threshVal, threshIneq):
+    retArray=ones((shape(dataMatrix)[0], 1))
     if threshIneq=='lt':
         retArray[dataMatrix[:,dimen] <= threshVal]=-1.0
     else:
@@ -16,13 +17,13 @@ def stumpClassify(dataMatrix,dimen,threshVal,threshIneq):
     return retArray
 
 
-def buildStump(dataArr,classLabels,D):
+def buildStump(dataArr, classLabels, D):
     dataMatrix=mat(dataArr)
     labelMat=mat(classLabels).T
     m,n=shape(dataMatrix)
     numSteps=10.0
     bestStump={}
-    bestClasEst=mat(zeros(m,1))
+    bestClasEst=mat(zeros(m, 1))
     minError=inf
     for i in range(n):
         rangeMin=dataMatrix[:,i].min()
@@ -31,9 +32,9 @@ def buildStump(dataArr,classLabels,D):
         for j in range(-1,int(numSteps)+1):
             for inequal in ['lt','gt']:
                 threshVal=(rangeMin+float(j))*stepSize
-                predictedVals=stumpClassify(dataMatrix,i,threshVal,inequal)
+                predictedVals=stumpClassify(dataMatrix, i, threshVal, inequal)
                 errArr=mat(ones(m,1))
-                errArr[predictedVals==labelMat]=0
+                errArr[predictedVals == labelMat] = 0
                 #计算加权错误率
                 weightedError=D.T*errArr
                 if weightedError<minError:

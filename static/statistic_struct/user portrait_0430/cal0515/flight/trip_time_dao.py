@@ -34,7 +34,7 @@ class TripTime():
         arrive_minute = arrive_h*60 + arrive_m
             # print(depart_minute,arrive_minute)
         if arrive_minute < depart_minute:
-            arrive_minute += arrive_minute + 24 * 60
+            arrive_minute += 1440
             diff_minute = arrive_minute - depart_minute
         else:
             diff_minute = arrive_minute - depart_minute
@@ -95,7 +95,7 @@ class TripTimeDao(object):
 
 
 def main_hb_trip_time():
-    out_file1 = open("data/trip_time_detail.data", "a")
+    out_file1 = open("data/trip_time_detail_new.data", "a")
     # out_file2 = open("data/trip_time_result.data", "a")
 
     o_go_times = TripTimeDao()

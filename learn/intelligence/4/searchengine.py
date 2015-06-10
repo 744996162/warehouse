@@ -48,7 +48,7 @@ class crawler:
             if word in ignorewords:
                 continue
             wordid=self.getentryid('wordlist','word',word)
-            self.con.execute("insert into wordlocation(urlid,wordid,location) values (%s,%s,%s)" % (urlid,wordid,i))
+            self.con.execute("insert into wordlocation(urlid,wordid,location) values (%s,%s,%s)" % (urlid, wordid, i))
 
             pass
 

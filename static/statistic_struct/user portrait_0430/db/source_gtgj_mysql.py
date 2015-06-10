@@ -20,14 +20,14 @@ class Mysql(object):
         _conf = DBConf.getInst()
         if Mysql._mysql_pool is None:
          #   MySQLdb.install_as_MySQLdb()
-            if dbtype == 'gtgj89':
-                Mysql._mysql_pool = PooledDB(creator=MySQLdb, mincached=1, maxcached=20,host=_conf.get_mysql('hostgtgj89'), port=string.atoi(_conf.get_mysql('portgtgj89')), user=_conf.get_mysql('usergtgj89'), passwd=_conf.get_mysql('passwordgtgj89'), database=_conf.get_mysql('databasegtgj89'), charset='utf8',cursorclass=DictCursor)
+            if  dbtype=='gtgj89':
+                Mysql._mysql_pool = PooledDB(creator=MySQLdb, mincached=1, maxcached=20,host=_conf.get_mysql('hostgtgj89'), port=string.atoi(_conf.get_mysql('portgtgj89')), user=_conf.get_mysql('usergtgj89'), passwd=_conf.get_mysql('passwordgtgj89'), database=_conf.get_mysql('databasegtgj89'), charset='utf8')
             elif dbtype == "gtgj81":
-                 Mysql._mysql_pool = PooledDB(creator=MySQLdb, mincached=1, maxcached=20,host=_conf.get_mysql('hostgtgj81'), port=string.atoi(_conf.get_mysql('portgtgj81')), user=_conf.get_mysql('usergtgj81'), passwd=_conf.get_mysql('passwordgtgj81'), database=_conf.get_mysql('databasegtgj81'), charset='utf8',cursorclass=DictCursor)
+                 Mysql._mysql_pool = PooledDB(creator=MySQLdb, mincached=1, maxcached=20,host=_conf.get_mysql('hostgtgj81'), port=string.atoi(_conf.get_mysql('portgtgj81')), user=_conf.get_mysql('usergtgj81'), passwd=_conf.get_mysql('passwordgtgj81'), database=_conf.get_mysql('databasegtgj81'), charset='utf8')
             elif dbtype == "gtgj102":
-                Mysql._mysql_pool = PooledDB(creator=MySQLdb, mincached=1, maxcached=20,host=_conf.get_mysql('hostgtgj102'), port=string.atoi(_conf.get_mysql('portgtgj102')), user=_conf.get_mysql('usergtgj102'), passwd=_conf.get_mysql('passwordgtgj102'), database=_conf.get_mysql('databasegtgj102'), charset='utf8', cursorclass=DictCursor)
+                Mysql._mysql_pool = PooledDB(creator=MySQLdb, mincached=1, maxcached=20,host=_conf.get_mysql('hostgtgj102'), port=string.atoi(_conf.get_mysql('portgtgj102')), user=_conf.get_mysql('usergtgj102'), passwd=_conf.get_mysql('passwordgtgj102'), database=_conf.get_mysql('databasegtgj102'), charset='utf8')
             else:
-                Mysql._mysql_pool = PooledDB(creator=MySQLdb, mincached=1, maxcached=20,host=_conf.get_mysql('hostlocal'), port=string.atoi(_conf.get_mysql('portlocal')), user=_conf.get_mysql('userlocal'), passwd=_conf.get_mysql('passwordlocal'), database=_conf.get_mysql('databaselocal'), charset='utf8', cursorclass=DictCursor)
+                Mysql._mysql_pool = PooledDB(creator=MySQLdb, mincached=1, maxcached=20,host=_conf.get_mysql('hostlocal'), port=string.atoi(_conf.get_mysql('portlocal')), user=_conf.get_mysql('userlocal'), passwd=_conf.get_mysql('passwordlocal'), database=_conf.get_mysql('databaselocal'), charset='utf8')
         return Mysql._mysql_pool.connection()
 
     def get_all(self, sql, params=None):

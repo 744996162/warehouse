@@ -51,7 +51,7 @@ class ConsumerTimesDao(object):
             "from TICKET_ORDER  " \
             "where TICKET_ORDER.ORDERSTATUE not in (2,12,21,51,75) " \
             "and DATE_FORMAT(TICKET_ORDER.CREATETIME,'%%Y%%m%%d')>='%s' " \
-            "and DATE_FORMAT(TICKET_ORDER.CREATETIME,'%%Y%%m%%d')<'%s' "  % (s_day, e_day)
+            "and DATE_FORMAT(TICKET_ORDER.CREATETIME,'%%Y%%m%%d')<'%s' " % (s_day, e_day)
         print(sql)
 
         result_model_list = self.db.query_result_by_setValue(sql, self.ModelClass)

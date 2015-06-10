@@ -64,7 +64,7 @@ class NewUsersDao(object):
     def get_id(self, s_start_day, s_end_day):
         ''' querydate_str = "20150401" '''
 
-        sql = "select user_id from HBZJ_USER   " \
+        sql = "select distinct user_id from HBZJ_USER   " \
               "where USER_LOGINDATE>=to_date(%s,'yyyymmdd') " \
               "and USER_LOGINDATE<to_date('%s','yyyymmdd')  " %(s_start_day, s_end_day)
 
@@ -74,7 +74,7 @@ class NewUsersDao(object):
     def get_id_ios(self, s_start_day, s_end_day):
         ''' querydate_str = "20150401" '''
 
-        sql = "select user_id from HBZJ_USER   " \
+        sql = "select distinct user_id from HBZJ_USER   " \
               "where USER_LOGINDATE>=to_date(%s,'yyyymmdd') " \
               "and USER_LOGINDATE<to_date('%s','yyyymmdd')  " \
               "and (USER_CHANNEL LIKE '%%91ZS%%' or USER_CHANNEL LIKE '%%appstore%%' or USER_CHANNEL LIKE '%%juwan%%' or USER_CHANNEL LIKE '%%91PGZS%%' or USER_CHANNEL LIKE '%%kuaiyong%%' or USER_CHANNEL LIKE '%%TBT%%' or USER_CHANNEL LIKE '%%PPZS%%') "  %(s_start_day, s_end_day)
@@ -108,20 +108,20 @@ def testActiveId():
 
 
 def lcd():
-    file_out = open("lcd_result.data", "a")
+    file_out = open("lcd_result201505.data", "a")
     o_ActiveIdDao = ActiveIdDao()
-    active_set201504 = o_ActiveIdDao.get_id_set("20150401", "20150501")
+    active_set = o_ActiveIdDao.get_id_set("20150501", "20150601")
 
-    s_list = ["20150201", "20150101", "20141201", "20141101", "20141001", "20140901", "20140801", "20140701", "20140601", "20140501", "20140401", "20140301", "20140201", "20140101"]
-    e_list = ["20150301", "20150201", "20150101", "20141201", "20141101", "20141001", "20140901", "20140801", "20140701", "20140601", "20140501","20140401", "20140301", "20140201"]
+    s_list = ["20150401", "20150301", "20150201", "20150101", "20141201", "20141101", "20141001", "20140901", "20140801", "20140701", "20140601", "20140501", "20140401", "20140301", "20140201", "20140101"]
+    e_list = ["20150501", "20150401", "20150301", "20150201", "20150101", "20141201", "20141101", "20141001", "20140901", "20140801", "20140701", "20140601", "20140501","20140401", "20140301", "20140201"]
 
     for num, value in enumerate(s_list):
         print(s_list[num], e_list[num])
         o_NewUsersDao = NewUsersDao()
-        new_User_set201503 = o_NewUsersDao.get_id_set(s_list[num], e_list[num])
-        new_User_set201503_ios = o_NewUsersDao.get_id_ios_set(s_list[num], e_list[num])
-        all_num = str(len(active_set201504 & new_User_set201503))
-        ios_num = str(len(active_set201504 & new_User_set201503_ios))
+        new_User_set = o_NewUsersDao.get_id_set(s_list[num], e_list[num])
+        new_User_set_ios = o_NewUsersDao.get_id_ios_set(s_list[num], e_list[num])
+        all_num = str(len(active_set & new_User_set))
+        ios_num = str(len(active_set & new_User_set_ios))
         android_num = str(int(all_num)-int(ios_num))
         file_out.write(str(s_list[num]) + "\t" + all_num + "\t" + str(ios_num) + "\t" + str(android_num) + "\n")
         print("all:" + str(all_num))

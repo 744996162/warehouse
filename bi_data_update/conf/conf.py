@@ -29,7 +29,7 @@ class DBConf(object):
     def get_mysql(self, key):
         return self.config.get('mysql', key)
 
-if __name__=="__main__":
+if __name__ == "__main__":
     pass
     test=DBConf()
     print(test.get_mysql("databasegtgj"))

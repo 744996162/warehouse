@@ -142,14 +142,19 @@ class CodeDictDao(object):
 
         return result_model_list
 
-    def result_to_txt(self, city_name, out_path="data/"):
+    def result_to_txt(self, filename, out_path="data/"):
         result_model_list = self.get_result()
-        file_name = city_name
+        file_name = filename
         file_path = out_path + file_name + "dict"
         file_out = open(file_path, "a")
+
         for result_model in result_model_list:
             # print(result_model)
-            file_out.write(result_model.toString() + "\n")
+            try:
+                file_out.write(result_model.code + "\t" + result_model.name + "\n")
+            except Exception as e:
+                print(result_model.code, result_model.name)
+                print(e)
         pass
 
     def get_code_dict(self):
@@ -177,8 +182,16 @@ def testPhoneDictDao():
     print(dict_city)
     pass
 
+def testCodeDictDao():
+    o_CodeDictDao = CodeDictDao()
+    o_CodeDictDao.result_to_txt("threecode")
+    pass
+
+
+
 if __name__ == "__main__":
     # testOrderPhone()
     # phoneDictTest()
-    testPhoneDictDao()
+    # testPhoneDictDao()
+    testCodeDictDao()
     pass

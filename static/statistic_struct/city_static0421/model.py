@@ -51,7 +51,7 @@ class ThreeCodeDict():
         self.name = valueList[1]
 
     def toString(self):
-        out_Str = self.code + "\t" + self.name
+        out_Str = str(self.code + "\t" + self.name)
         return out_Str
 
 class SourcePhone(object):

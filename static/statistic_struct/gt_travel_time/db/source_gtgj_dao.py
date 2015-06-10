@@ -45,7 +45,7 @@ class TravelTimeDao(object):
         result_model_list = self.db.query_result_by_setValue(sql, self.ModelClass)
         return result_model_list
 
-    def get_data_to_txt(self, s_day,e_day, file_path):
+    def get_data_to_txt(self, s_day, e_day, file_path):
         result_model_list = self.get_data(s_day, e_day)
         print(s_day, len(result_model_list))
         file_out = open(file_path, "a")

@@ -61,8 +61,8 @@ class GoTimesDao(object):
 
 
 def main_hb_go_times():
-    out_file1 = open("data/hb_go_times_user_details.data", "a")
-    out_file2 = open("data/hb_go_times.data", "a")
+    out_file1 = open("data/hb_go_times_child_details.data", "a")
+    out_file2 = open("data/hb_child_go_times.data", "a")
     o_go_times = GoTimesDao()
     result_model_list = o_go_times.get_no()
     no_list = [result_model.passengerno for result_model in result_model_list]

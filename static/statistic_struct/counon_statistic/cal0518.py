@@ -48,20 +48,20 @@ def main():
     newconsumer_3 = "data0518/newconsumer20150101"
 
     coupon1_list = coupon_cal(coupon_1)
-    newconsumer1_list = coupon_cal(newconsumer_1)
+    newconsumer1_list = newconsumers_cal(newconsumer_1)
     print("2014Q3", len(coupon1_list), len(set(newconsumer1_list)), len(listRepeat2(coupon1_list,newconsumer1_list)))
 
     coupon2_list = coupon_cal(coupon_2)
-    newconsumer2_list = coupon_cal(newconsumer_2)
-    print("2014Q4", len(coupon2_list), len(set(newconsumer2_list)),len(listRepeat2(coupon2_list, newconsumer2_list)))
+    newconsumer2_list = newconsumers_cal(newconsumer_2)
+    print("2014Q4", len(coupon2_list), len(set(newconsumer2_list)), len(listRepeat2(coupon2_list, newconsumer2_list)))
 
 
     coupon3_list = coupon_cal(coupon_3)
-    newconsumer3_list = coupon_cal(newconsumer_3)
+    newconsumer3_list = newconsumers_cal(newconsumer_3)
     print("2015Q1", len(coupon3_list), len(set(newconsumer3_list)),len(listRepeat2(coupon3_list, newconsumer3_list)))
-
-
     pass
+
+
 if __name__ == "__main__":
     # coupon_cal()
     # test1()
