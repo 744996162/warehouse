@@ -59,10 +59,26 @@ def gt_update():
         gtgj_service.gt_consumers_monthly(this_day1)
 
 
+def hb_active_error0616():
+    his1DaysBefore = getHisday(1)
+    # print(his1DaysBefore)
+    hbgj_service.hb_active_error_daily(his1DaysBefore)
+
+    pass
 
 if __name__ == "__main__":
-    hb_update()
-    gt_update()
+    # hb_update()
+    # gt_update()
+
+    # his1DaysBefore = getHisday(6)
+    # print(his1DaysBefore)
+    # hbgj_service.hb_active_error_daily(his1DaysBefore)
+
+    # his5DaysBefore = getHisday(5)
+    # gtgj_service.gt_active_daily(his5DaysBefore)
+    yestoday = getYestoday()
+    gtgj_service.gt_newusers_daily(yestoday)
+
 
     pass
 

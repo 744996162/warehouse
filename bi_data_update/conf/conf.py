@@ -7,9 +7,9 @@ sys.path.append('..')
 path=os.path.abspath('..')
 #测试路径
 # conf_path=path+"/conf/db.conf"
-conf_path=path+"/conf/db3.conf"
+# conf_path=path+"/conf/db3.conf"
 #部署路径
-# conf_path="conf/db3.conf"
+conf_path="conf/db3.conf"
 
 class DBConf(object):
     _inst=None

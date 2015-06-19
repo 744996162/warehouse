@@ -71,7 +71,7 @@ class ActiveUsersDao(object):
         self.db = DBClass()
         self.ModelClass = ModelClass
     def get_users_daily(self, querydate_str):
-        sql = "select distinct to_char(createtime,'yyyy-mm-dd') s_day,count(distinct md5),sum(case when p LIKE '%%91ZS%%' or p LIKE '%%appstore%%' or p LIKE '%%juwan%%' or p LIKE '%%91PGZS%%' or p LIKE '%%kuaiyong%%' or p LIKE '%%TBT%%' or p LIKE '%%PPZS%%' then 1 else 0 end ) ios_activeusers " \
+        sql = "select distinct to_char(createtime,'yyyy-mm-dd') s_day,count(distinct userid),sum(case when p LIKE '%%91ZS%%' or p LIKE '%%appstore%%' or p LIKE '%%juwan%%' or p LIKE '%%91PGZS%%' or p LIKE '%%kuaiyong%%' or p LIKE '%%TBT%%' or p LIKE '%%PPZS%%' then 1 else 0 end ) ios_activeusers " \
               "from ACTIVE_USER_LOG where createtime>=to_date(%s, 'yyyymmdd') group by to_char(createtime,'yyyy-mm-dd') order by  to_char(createtime,'yyyy-mm-dd')" % querydate_str
         result_model_list = self.db.query_result(sql, self.ModelClass)
         return result_model_list
@@ -102,6 +102,8 @@ class NewUsersDao(object):
 
         result_model_list = self.db.query_result(sql, self.ModelClass)
         return result_model_list
+
+
 
 class OrderDao(object):
     def __init__(self, DBClass=BaseUserMysqlDao, ModelClass=Orders):

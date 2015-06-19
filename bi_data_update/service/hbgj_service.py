@@ -17,6 +17,20 @@ def hb_active_daily(s_day):
     except Exception as e:
         print(e)
 
+
+def hb_active_error_daily(s_day):
+    from db import source_hbgj_dao_error0616
+    try:
+        o_source = source_hbgj_dao_error0616.ActiveUsersDao()
+        o_goal = goal_dao.HbUpdateDao()
+        users_results_daily = o_source.get_users_daily(s_day)
+        o_goal.activeDailyUpdate(users_results_daily)
+        for user in users_results_daily:
+            print(user)
+    except Exception as e:
+        print(e)
+
+
 def hb_active_weekly(s_day):
     try:
         o_source = source_hbgj_dao.ActiveUsersDao()

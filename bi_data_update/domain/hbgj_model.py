@@ -78,7 +78,8 @@ class Active_users(object):
         self.active_users_android = 0
 
     def __str__(self):
-        out_str = "HB_active_users:" + "\t" + str(self.s_day) + "\t" + str(self.active_users)
+        out_str = "HB_active_users:" + "\t" + str(self.s_day) + "\t" + str(self.active_users) \
+                  + "\t" + str(self.active_users_ios) + "\t" + str(self.active_users_android)
         return out_str
 
     def getlist(self):
