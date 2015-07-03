@@ -59,7 +59,7 @@ class Flight_child_price(object):
         "and TICKET_ORDERDETAIL.PASSENGERTYPE='CHD'" \
         "and DATE_FORMAT(TICKET_ORDER.CREATETIME,'%%Y%%m%%d')>='%s' " \
         "and DATE_FORMAT(TICKET_ORDER.CREATETIME,'%%Y%%m%%d')<'%s'  " % (s_day, e_day)
-        result_model_list = self.db.query_result_by_setValue(sql,model_class=self.ModelClass)
+        result_model_list = self.db.query_result_by_setValue(sql, model_class=self.ModelClass)
         return result_model_list
     pass
 
@@ -83,7 +83,7 @@ class Flight_child_price(object):
             average = 0
         else:
             average = sum/count
-        print(s_day, e_day,count,sum,average)
+        print(s_day, e_day, count, sum, average)
 
 
 

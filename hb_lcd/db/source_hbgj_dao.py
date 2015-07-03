@@ -39,7 +39,7 @@ class ActiveIdDao(object):
         result_model_list=self.db.query_result_by_setValue(sql, self.ModelClass)
         return result_model_list
 
-    def get_id_to_txt(self,s_start_day, s_end_day, file_path=""):
+    def get_id_to_txt(self, s_start_day, s_end_day, file_path=""):
         if file_path == "":
             file_path = "active" + s_start_day[0:6]
         file_out = open(file_path, "a")
@@ -108,12 +108,12 @@ def testActiveId():
 
 
 def lcd():
-    file_out = open("lcd_result201505.data", "a")
+    file_out = open("lcd_result201506.data", "a")
     o_ActiveIdDao = ActiveIdDao()
-    active_set = o_ActiveIdDao.get_id_set("20150501", "20150601")
+    active_set = o_ActiveIdDao.get_id_set("20150601", "20150701")
 
-    s_list = ["20150401", "20150301", "20150201", "20150101", "20141201", "20141101", "20141001", "20140901", "20140801", "20140701", "20140601", "20140501", "20140401", "20140301", "20140201", "20140101"]
-    e_list = ["20150501", "20150401", "20150301", "20150201", "20150101", "20141201", "20141101", "20141001", "20140901", "20140801", "20140701", "20140601", "20140501","20140401", "20140301", "20140201"]
+    s_list = ["20150501", "20150401", "20150301", "20150201", "20150101", "20141201", "20141101", "20141001", "20140901", "20140801", "20140701", "20140601", "20140501", "20140401", "20140301", "20140201", "20140101"]
+    e_list = ["20150601", "20150501", "20150401", "20150301", "20150201", "20150101", "20141201", "20141101", "20141001", "20140901", "20140801", "20140701", "20140601", "20140501","20140401", "20140301", "20140201"]
 
     for num, value in enumerate(s_list):
         print(s_list[num], e_list[num])

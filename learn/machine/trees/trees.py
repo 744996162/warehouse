@@ -2,6 +2,7 @@
 from math import log
 import operator
 #计算给定数据集的香农熵
+
 def calcShannonEnt(dataSet):
     numEntries=len(dataSet)
     labelCounts={}
@@ -41,7 +42,7 @@ def choseBestFeatureToSplit(dataSet):
         newEntropy=0.0
         for value in uniqueVals:
             #计算每种划分方式的信息熵
-            subDataSet=splitDataSet(dataSet,i , value)
+            subDataSet=splitDataSet(dataSet, i, value)
             prob = len(subDataSet)/float(len(dataSet))
             newEntropy+=prob*calcShannonEnt(subDataSet)
         infoGain=baseEntorpy-newEntropy
@@ -55,9 +56,9 @@ def majorityCnt(classList):
     classCount={}
     for vote in classList:
         if vote not in classCount.keys():
-            classCount[vote]=0
-            classCount[vote]+=1
-    sortedClassCount=sorted(classCount.iteritems(),key=operator.itemgetter(1),reverse=True)
+            classCount[vote] = 0
+            classCount[vote] += 1
+    sortedClassCount=sorted(classCount.iteritems(), key=operator.itemgetter(1), reverse=True)
     return sortedClassCount[0][0]
 
 
@@ -70,11 +71,11 @@ def createTree(dataSet,labels):
     classList=[example[-1] for example in dataSet]
 
     #类别完全相同则停止继续划分
-    if classList.count(classList[0])==len(classList):
+    if classList.count(classList[0]) == len(classList):
         return classList[0]
 
     #遍历完所有特征时返回出现次数最多的
-    if len(dataSet[0])==1:
+    if len(dataSet[0]) == 1:
         return majorityCnt(classList)
 
 

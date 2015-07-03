@@ -63,9 +63,9 @@ def hbgj_lcd(start_date_str,end_date_str):
     return users
 
 def test():
-    file = open("result_lcd_all201505.txt", 'a')
+    file = open("result_lcd_all201506.txt", 'a')
     # file=open("result_lcd_ios201502.txt",'a')
-    for i in range(2, 12, 1):
+    for i in range(0, 12, 1):
         end_date_str = query_date.hb_getMonthlyDate_lcd(i)
         start_date_str = query_date.hb_getMonthlyDate_lcd(i+1)
         # print(start_date_str,end_date_str)

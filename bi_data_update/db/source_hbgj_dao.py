@@ -344,7 +344,7 @@ class NewConsumersDao(object):
                 "and DATE_FORMAT(createtime,'%%Y%%m%%d')< %s " \
                 ") group by s_day " % (querydate_str, querydate_str, querydate_str, querydate_str)
 
-        result_model_list=self.db.query_result(sql, self.ModelClass)
+        result_model_list = self.db.query_result(sql, self.ModelClass)
         return result_model_list
         pass
 
